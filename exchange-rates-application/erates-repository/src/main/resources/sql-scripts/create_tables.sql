@@ -1,0 +1,4 @@
+DROP SCHEMA IF EXISTS `erates_db`;
+CREATE SCHEMA IF NOT EXISTS `erates_db` DEFAULT CHARACTER SET utf8;
+USE `erates_db`;
+

@@ -1,6 +1,8 @@
 /target
 /bin
 /.classpath
+/.settings
 /*/target
 /*/bin
 /*/.classpath
+/*/.settings
