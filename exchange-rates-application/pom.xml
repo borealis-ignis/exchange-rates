@@ -26,5 +26,6 @@
 		<module>erates-supplier-prior</module>
 		<module>erates-repository</module>
 		<module>erates-updater</module>
+		<module>erates-common</module>
 	</modules>
 </project>

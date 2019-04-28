@@ -13,7 +13,7 @@
 	<div class="container">
 		<div id="banks_container">
 			<ul>
-				<li>Prior</li>
+				<li th:each="bank : ${banks}" th:text="${bank.name}" th:id="${bank.code}"></li>
 			</ul>
 		</div>
 		<div id="charts_container">

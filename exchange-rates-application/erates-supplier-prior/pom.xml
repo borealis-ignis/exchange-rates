@@ -11,4 +11,12 @@
 	<name>Prior-module</name>
 	<description>Supplier Prior module</description>
 	
+	<dependencies>
+		<dependency>
+			<groupId>com.borealis</groupId>
+			<artifactId>erates-common</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+	</dependencies>
+	
 </project>

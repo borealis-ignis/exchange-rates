@@ -5,6 +5,9 @@
   <projects>
     <project>erates-service</project>
     <project>erates-repository</project>
+    <project>erates-common</project>
+    <project>erates-updater</project>
+    <project>erates-supplier-prior</project>
   </projects>
   <buildSpec>
     <buildCommand>
