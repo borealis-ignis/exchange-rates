@@ -12,8 +12,8 @@
 <body>
 	<div class="container">
 		<div id="banks_container">
-			<ul>
-				<li th:each="bank : ${banks}" th:text="${bank.name}" th:id="${bank.code}"></li>
+			<ul class="banks-items">
+				<li th:each="bank : ${banks}" th:text="${bank.name}" th:id="${bank.code}" th:classappend="${bank.code == bankCode}?active"></li>
 			</ul>
 		</div>
 		<div id="charts_container">
