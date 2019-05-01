@@ -28,7 +28,7 @@ public class CurrencyDbo {
 	@Column(name = "Id")
 	private Long id;
 	
-	@Column(name = "Code")
+	@Column(name = "Code", unique = true)
 	private String code;
 	
 	@OneToMany(mappedBy = "currency", orphanRemoval = false, fetch = FetchType.LAZY)

@@ -28,7 +28,7 @@ public class BankDbo {
 	@Column(name = "Id")
 	private Long id;
 	
-	@Column(name = "Code")
+	@Column(name = "Code", unique = true)
 	private String code;
 	
 	@Column(name = "Active")
