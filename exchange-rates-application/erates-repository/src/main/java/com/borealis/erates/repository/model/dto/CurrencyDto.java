@@ -8,12 +8,10 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class BankDto {
+public class CurrencyDto {
 	
 	private Long id;
 	
 	private String code;
-	
-	private Boolean active;
 	
 }

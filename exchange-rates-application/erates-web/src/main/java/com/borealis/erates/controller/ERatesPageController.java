@@ -9,8 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.borealis.erates.repository.model.dto.BankDto;
 import com.borealis.erates.service.ExchangeRatesService;
+import com.borealis.erates.supplier.Bank;
+import com.borealis.erates.supplier.impl.NoBank;
 
 /**
  * @author Kastalski Sergey
@@ -28,10 +29,10 @@ public class ERatesPageController {
 	public String getSingleRecipePage(
 			final Map<String, Object> model,
 			@RequestParam(required = false, name = "bankCode") String bankCode) {
-		final List<BankDto> banks = eratesService.getBanks();
+		final List<Bank> banks = eratesService.getBanks();
 		if (StringUtils.isBlank(bankCode)) {
-			final Optional<BankDto> bankOpt = banks.stream().findFirst();
-			bankCode = bankOpt.orElse(new BankDto()).getCode();
+			final Optional<Bank> bankOpt = banks.stream().findFirst();
+			bankCode = bankOpt.orElse(new NoBank()).getBankCode();
 		}
 		model.put("banks", banks);
 		model.put("bankCode", bankCode);

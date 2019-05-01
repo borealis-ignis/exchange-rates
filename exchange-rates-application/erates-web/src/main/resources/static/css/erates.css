@@ -14,6 +14,8 @@ html, body {
 }
 .container #banks_container ul.banks-items li {
 	list-style-type: none;
+	background-color: #fff;
+	padding: 8px 12px;
 }
 .container #charts_container {
 	float: left;
