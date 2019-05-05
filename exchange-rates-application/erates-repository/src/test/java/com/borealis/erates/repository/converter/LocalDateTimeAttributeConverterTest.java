@@ -24,9 +24,21 @@ public class LocalDateTimeAttributeConverterTest {
 	}
 	
 	@Test
+	public void convertNullToTimestampTest() {
+		final Timestamp timestamp = converter.convertToDatabaseColumn(null);
+		assertThat(timestamp).isNull();
+	}
+	
+	@Test
 	public void convertToLocalDateTimeTest() {
 		final LocalDateTime localDateTime = converter.convertToEntityAttribute(TestDataContainer.getTimestamp());
 		assertThat(localDateTime).isEqualTo(TestDataContainer.getLocalDateTime());
+	}
+	
+	@Test
+	public void convertNullToLocalDateTimeTest() {
+		final LocalDateTime localDateTime = converter.convertToEntityAttribute(null);
+		assertThat(localDateTime).isNull();
 	}
 	
 }
