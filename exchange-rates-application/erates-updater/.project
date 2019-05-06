@@ -4,8 +4,8 @@
   <comment>Exchange rates updater service. NO_M2ECLIPSE_SUPPORT: Project files created with the maven-eclipse-plugin are not supported in M2Eclipse.</comment>
   <projects>
     <project>erates-repository</project>
-    <project>erates-supplier-prior</project>
     <project>erates-common</project>
+    <project>erates-supplier-prior</project>
   </projects>
   <buildSpec>
     <buildCommand>
