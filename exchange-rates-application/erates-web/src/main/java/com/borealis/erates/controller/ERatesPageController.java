@@ -5,6 +5,8 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,6 +20,8 @@ import com.borealis.erates.supplier.impl.NoBank;
  */
 @Controller
 public class ERatesPageController {
+	
+	private static Logger logger = LoggerFactory.getLogger(ERatesPageController.class);
 	
 	private ExchangeRatesService eratesService;
 	

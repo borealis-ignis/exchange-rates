@@ -4,12 +4,14 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import com.borealis.erates.supplier.Bank;
+import com.borealis.erates.supplier.BankProcessor;
+import com.borealis.erates.supplier.exception.RatesProcessingException;
 
 /**
  * @author Kastalski Sergey
  */
 @Component
-public class PriorBank implements Bank {
+public class PriorBank implements Bank, BankProcessor {
 	
 	private String name;
 	
@@ -30,6 +32,11 @@ public class PriorBank implements Bank {
 	@Override
 	public String getBankCode() {
 		return code;
+	}
+
+	@Override
+	public void process() throws RatesProcessingException {
+		
 	}
 	
 }
