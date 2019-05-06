@@ -12,14 +12,13 @@ public class ERatesRestController {
 	
 	private ExchangeRatesService eratesService;
 	
-	public void getBanks() {
-		
-	}
 	
 	public ERatesRestController(final ExchangeRatesService eratesService) {
 		this.eratesService = eratesService;
 	}
 	
-	
+	public void getBanks() {
+		
+	}
 	
 }
