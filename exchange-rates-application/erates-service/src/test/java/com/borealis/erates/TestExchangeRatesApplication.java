@@ -17,7 +17,7 @@ public class TestExchangeRatesApplication {
 	}
 	
 	@Bean
-	public Bank priorBank() {
+	public Bank testPriorBank() {
 		return new Bank() {
 			
 			@Override
