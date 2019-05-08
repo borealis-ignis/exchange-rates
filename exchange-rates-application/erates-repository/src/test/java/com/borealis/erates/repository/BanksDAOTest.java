@@ -47,4 +47,13 @@ public class BanksDAOTest {
 		assertThat(foundBanks).isNotEmpty().containsAll(savedBanks);
 	}
 	
+	@Test
+	public void findBankByCodeTest() {
+		final BankDbo savedBank = savedBanks.get(0);
+		
+		final BankDbo foundBank = banksDAO.findByCode(savedBank.getCode());
+		
+		assertThat(foundBank).isEqualToComparingFieldByFieldRecursively(savedBank);
+	}
+	
 }

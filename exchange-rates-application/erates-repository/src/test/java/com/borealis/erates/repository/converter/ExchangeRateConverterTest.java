@@ -12,9 +12,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.borealis.erates.TestDataContainer;
+import com.borealis.erates.model.dto.ExchangeRateDto;
 import com.borealis.erates.repository.converter.impl.ExchangeRateConverter;
 import com.borealis.erates.repository.model.dbo.ExchangeRateDbo;
-import com.borealis.erates.repository.model.dto.ExchangeRateDto;
 
 /**
  * @author Kastalski Sergey

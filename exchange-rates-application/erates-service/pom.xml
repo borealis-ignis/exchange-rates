@@ -21,6 +21,13 @@
 		</dependency>
 		<dependency>
 			<groupId>com.borealis</groupId>
+			<artifactId>erates-common</artifactId>
+			<version>${project.version}</version>
+			<type>test-jar</type>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.borealis</groupId>
 			<artifactId>erates-repository</artifactId>
 			<version>${project.version}</version>
 		</dependency>
@@ -32,6 +39,10 @@
 				<exclusion>
 					<groupId>org.springframework.boot</groupId>
 					<artifactId>spring-boot-starter-logging</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.skyscreamer</groupId>
+					<artifactId>jsonassert</artifactId>
 				</exclusion>
 			</exclusions>
 		</dependency>

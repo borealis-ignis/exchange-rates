@@ -12,9 +12,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.borealis.erates.TestDataContainer;
+import com.borealis.erates.model.dto.CurrencyDto;
 import com.borealis.erates.repository.converter.impl.CurrencyConverter;
 import com.borealis.erates.repository.model.dbo.CurrencyDbo;
-import com.borealis.erates.repository.model.dto.CurrencyDto;
 
 /**
  * @author Kastalski Sergey
@@ -28,7 +28,7 @@ public class CurrencyConverterTest {
 	
 	@Test
 	public void currencyDtoToDboTest() {
-		final CurrencyDto dto = TestDataContainer.getCurrencyDto(true);
+		final CurrencyDto dto = TestDataContainer.getUSDCurrencyDto(true);
 		
 		assertThat(TestDataContainer.getCurrencyDbo(true)).isEqualToComparingFieldByField(converter.convertDto(dto));
 	}
@@ -37,12 +37,12 @@ public class CurrencyConverterTest {
 	public void currencyDboToDtoTest() {
 		final CurrencyDbo dbo = TestDataContainer.getCurrencyDbo(true);
 		
-		assertThat(TestDataContainer.getCurrencyDto(true)).isEqualToComparingFieldByField(converter.convertDbo(dbo));
+		assertThat(TestDataContainer.getUSDCurrencyDto(true)).isEqualToComparingFieldByField(converter.convertDbo(dbo));
 	}
 	
 	@Test
 	public void currencyListDtoToDboTest() {
-		final CurrencyDto dto = TestDataContainer.getCurrencyDto(true);
+		final CurrencyDto dto = TestDataContainer.getUSDCurrencyDto(true);
 		final List<CurrencyDto> dtos = new ArrayList<>();
 		dtos.add(dto);
 		
@@ -63,7 +63,7 @@ public class CurrencyConverterTest {
 		final List<CurrencyDbo> dbos = new ArrayList<>();
 		dbos.add(dbo);
 		
-		final CurrencyDto dto = TestDataContainer.getCurrencyDto(true);
+		final CurrencyDto dto = TestDataContainer.getUSDCurrencyDto(true);
 		final List<CurrencyDto> dtos = new ArrayList<>();
 		dtos.add(dto);
 		

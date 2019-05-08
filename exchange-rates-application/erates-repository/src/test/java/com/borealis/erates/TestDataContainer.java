@@ -4,12 +4,12 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
+import com.borealis.erates.model.dto.BankDto;
+import com.borealis.erates.model.dto.CurrencyDto;
+import com.borealis.erates.model.dto.ExchangeRateDto;
 import com.borealis.erates.repository.model.dbo.BankDbo;
 import com.borealis.erates.repository.model.dbo.CurrencyDbo;
 import com.borealis.erates.repository.model.dbo.ExchangeRateDbo;
-import com.borealis.erates.repository.model.dto.BankDto;
-import com.borealis.erates.repository.model.dto.CurrencyDto;
-import com.borealis.erates.repository.model.dto.ExchangeRateDto;
 
 /**
  * @author Kastalski Sergey
@@ -47,12 +47,22 @@ public abstract class TestDataContainer {
 		return dbo;
 	}
 	
-	public static CurrencyDto getCurrencyDto(final boolean withId) {
+	public static CurrencyDto getUSDCurrencyDto(final boolean withId) {
 		final CurrencyDto dto = new CurrencyDto();
 		if (withId) {
 			dto.setId(1l);
 		}
 		dto.setCode("USD");
+		
+		return dto;
+	}
+	
+	public static CurrencyDto getEURCurrencyDto(final boolean withId) {
+		final CurrencyDto dto = new CurrencyDto();
+		if (withId) {
+			dto.setId(2l);
+		}
+		dto.setCode("EUR");
 		
 		return dto;
 	}
@@ -76,7 +86,7 @@ public abstract class TestDataContainer {
 		dto.setSellRate(sellRate);
 		dto.setUpdateDate(updateDate);
 		dto.setBank(getBankDto(withId));
-		dto.setCurrency(getCurrencyDto(withId));
+		dto.setCurrency(getUSDCurrencyDto(withId));
 		
 		return dto;
 	}

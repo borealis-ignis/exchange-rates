@@ -20,7 +20,11 @@ import com.borealis.erates.repository.model.dbo.CurrencyDbo;
  * @author Kastalski Sergey
  */
 @RunWith(SpringRunner.class)
-@DataJpaTest
+@DataJpaTest(showSql = true, properties = { 
+		"spring.jpa.properties.hibernate.generate_statistics=true",
+		"spring.jpa.properties.hibernate.jdbc.batch_size=1", 
+		"spring.jpa.properties.hibernate.order_inserts=true"
+		})
 @AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
 public class CurrenciesDAOTest {
 	

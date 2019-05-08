@@ -12,9 +12,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.borealis.erates.TestDataContainer;
+import com.borealis.erates.model.dto.BankDto;
 import com.borealis.erates.repository.converter.impl.BankConverter;
 import com.borealis.erates.repository.model.dbo.BankDbo;
-import com.borealis.erates.repository.model.dto.BankDto;
 
 /**
  * @author Kastalski Sergey

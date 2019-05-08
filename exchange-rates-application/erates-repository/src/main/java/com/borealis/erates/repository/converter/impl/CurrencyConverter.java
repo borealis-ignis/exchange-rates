@@ -5,9 +5,9 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.borealis.erates.model.dto.CurrencyDto;
 import com.borealis.erates.repository.converter.DtoDboConverter;
 import com.borealis.erates.repository.model.dbo.CurrencyDbo;
-import com.borealis.erates.repository.model.dto.CurrencyDto;
 
 /**
  * @author Kastalski Sergey

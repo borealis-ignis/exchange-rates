@@ -1,4 +1,4 @@
-package com.borealis.erates.repository.model.dto;
+package com.borealis.erates.model.dto;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

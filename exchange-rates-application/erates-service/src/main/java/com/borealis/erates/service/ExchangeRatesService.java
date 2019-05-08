@@ -6,12 +6,12 @@ import java.util.List;
 import org.apache.commons.lang3.BooleanUtils;
 import org.springframework.stereotype.Service;
 
+import com.borealis.erates.model.dto.BankDto;
+import com.borealis.erates.model.dto.ExchangeRateDto;
 import com.borealis.erates.repository.BanksDAO;
 import com.borealis.erates.repository.CurrenciesDAO;
 import com.borealis.erates.repository.ExchangeRatesDAO;
 import com.borealis.erates.repository.converter.impl.BankConverter;
-import com.borealis.erates.repository.model.dto.BankDto;
-import com.borealis.erates.repository.model.dto.ExchangeRateDto;
 import com.borealis.erates.supplier.Bank;
 
 /**

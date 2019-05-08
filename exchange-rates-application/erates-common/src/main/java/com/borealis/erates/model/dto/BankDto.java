@@ -1,4 +1,4 @@
-package com.borealis.erates.repository.model.dto;
+package com.borealis.erates.model.dto;
 
 import lombok.Getter;
 import lombok.Setter;
