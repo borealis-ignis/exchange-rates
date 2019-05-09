@@ -185,4 +185,14 @@ public class ExchangeRatesMockDAO implements ExchangeRatesDAO {
 		return updataDates;
 	}
 
+	@Override
+	public List<ExchangeRateDbo> findAllByDate(LocalDateTime from) {
+		return null;
+	}
+
+	@Override
+	public List<ExchangeRateDbo> findAllByDateAndCurrency(LocalDateTime from, Long currencyId) {
+		return null;
+	}
+
 }

@@ -94,6 +94,24 @@ public class ExchangeRatesDAOTest {
 	}
 	
 	@Test
+	public void findExchangeRatesByFromDateTest() {
+		final LocalDateTime updateDateMinus20m = updateDate.minusMinutes(20l);
+		final List<ExchangeRateDbo> foundRates = exchangeRatesDAO.findAllByDate(updateDateMinus20m);
+		
+		assertThat(foundRates).isNotEmpty().allMatch(r -> r.getUpdateDate().isAfter(updateDateMinus20m));
+	}
+	
+	@Test
+	public void findExchangeRatesByFromDateAndCurrencyTest() {
+		final LocalDateTime updateDateMinus20m = updateDate.minusMinutes(20l);
+		final Long currencyId = usd.getId();
+		final List<ExchangeRateDbo> foundRates = exchangeRatesDAO.findAllByDateAndCurrency(updateDateMinus20m, currencyId);
+		
+		assertThat(foundRates).isNotEmpty().allMatch(r -> r.getUpdateDate().isAfter(updateDateMinus20m));
+		assertThat(foundRates).allMatch(rate -> usd.getCode().equals(rate.getCurrency().getCode()));
+	}
+	
+	@Test
 	public void saveNewExchangeRatesTest() {
 		final List<ExchangeRateDbo> newExchangeRates = new ArrayList<>();
 		newExchangeRates.add(DBTestUtil.createExchangeRate("2.1111", "2.1611", usd, prior, LocalDateTime.now().plusMinutes(30)));

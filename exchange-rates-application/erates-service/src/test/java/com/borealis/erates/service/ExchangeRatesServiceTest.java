@@ -5,6 +5,7 @@ import static org.mockito.Mockito.when;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -18,8 +19,15 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.borealis.erates.TestDataContainer;
+import com.borealis.erates.model.dto.CurrencyDto;
+import com.borealis.erates.model.dto.ExchangeRateDto;
 import com.borealis.erates.repository.BanksDAO;
+import com.borealis.erates.repository.CurrenciesDAO;
+import com.borealis.erates.repository.DBTestUtil;
+import com.borealis.erates.repository.ExchangeRatesDAO;
 import com.borealis.erates.repository.model.dbo.BankDbo;
+import com.borealis.erates.repository.model.dbo.CurrencyDbo;
+import com.borealis.erates.repository.model.dbo.ExchangeRateDbo;
 import com.borealis.erates.supplier.Bank;
 
 
@@ -40,6 +48,85 @@ public class ExchangeRatesServiceTest {
 	@MockBean
 	private BanksDAO banksDAO;
 	
+	@MockBean
+	private CurrenciesDAO currenciesDAO;
+	
+	@MockBean
+	private ExchangeRatesDAO exchangeRatesDAO;
+	
+	
+	@Test
+	public void getExchangeRatesByFromDateTest() {
+		final LocalDateTime updateDate = LocalDateTime.now();
+		final CurrencyDbo usd = DBTestUtil.createCurrency("USD");
+		usd.setId(1l);
+		final BankDbo prior = DBTestUtil.createBank(1l, "priorb", true);
+		final List<ExchangeRateDbo> rates = new ArrayList<>();
+		rates.add(DBTestUtil.createExchangeRate("2.1000", "2.1511", usd, prior, updateDate));
+		rates.add(DBTestUtil.createExchangeRate("2.1000", "2.1511", usd, prior, updateDate.minusMinutes(5l)));
+		rates.add(DBTestUtil.createExchangeRate("2.1000", "2.1511", usd, prior, updateDate.minusMinutes(10l)));
+		rates.add(DBTestUtil.createExchangeRate("2.1000", "2.1511", usd, prior, updateDate.minusMinutes(14l)));
+		
+		final List<LocalDateTime> dates = new ArrayList<>();
+		rates.forEach(r -> dates.add(r.getUpdateDate()));
+		
+		
+		final LocalDateTime from = updateDate.minusMinutes(20l);
+		
+		when(exchangeRatesDAO.findAllByDate(from)).thenReturn(rates);
+		
+		final List<ExchangeRateDto> dtoRates = service.getExchangeRates(from, null);
+		
+		assertThat(dtoRates.size()).isEqualTo(rates.size());
+		assertThat(dtoRates).extracting("updateDate", LocalDateTime.class).containsAnyElementsOf(dates);
+	}
+	
+	@Test
+	public void getExchangeRatesByFromDateAndCurrencyTest() {
+		final LocalDateTime updateDate = LocalDateTime.now();
+		final CurrencyDbo usd = DBTestUtil.createCurrency("USD");
+		usd.setId(1l);
+		final BankDbo prior = DBTestUtil.createBank(1l, "priorb", true);
+		final List<ExchangeRateDbo> rates = new ArrayList<>();
+		rates.add(DBTestUtil.createExchangeRate("2.1000", "2.1511", usd, prior, updateDate));
+		rates.add(DBTestUtil.createExchangeRate("2.1000", "2.1511", usd, prior, updateDate.minusMinutes(5l)));
+		rates.add(DBTestUtil.createExchangeRate("2.1000", "2.1511", usd, prior, updateDate.minusMinutes(10l)));
+		rates.add(DBTestUtil.createExchangeRate("2.1000", "2.1511", usd, prior, updateDate.minusMinutes(14l)));
+		
+		final List<LocalDateTime> dates = new ArrayList<>();
+		rates.forEach(r -> dates.add(r.getUpdateDate()));
+		
+		
+		final LocalDateTime from = updateDate.minusMinutes(20l);
+		
+		when(exchangeRatesDAO.findAllByDateAndCurrency(from, usd.getId())).thenReturn(rates);
+		
+		final List<ExchangeRateDto> dtoRates = service.getExchangeRates(from, usd.getId());
+		
+		assertThat(dtoRates.size()).isEqualTo(rates.size());
+		assertThat(dtoRates).extracting("updateDate", LocalDateTime.class).containsAnyElementsOf(dates);
+	}
+	
+	@Test
+	public void getCurrenciesTest() {
+		final CurrencyDbo usd = DBTestUtil.createCurrency("USD");
+		usd.setId(1l);
+		final CurrencyDbo eur = DBTestUtil.createCurrency("EUR");
+		eur.setId(2l);
+		final List<CurrencyDbo> currencies = new ArrayList<>();
+		currencies.add(usd);
+		currencies.add(eur);
+		
+		final List<String> codes = new ArrayList<>();
+		currencies.forEach(c -> codes.add(c.getCode()));
+		
+		when(currenciesDAO.findAll()).thenReturn(currencies);
+		
+		final List<CurrencyDto> dtoCurrencies = service.getCurrencies();
+		
+		assertThat(dtoCurrencies.size()).isEqualTo(currencies.size());
+		assertThat(dtoCurrencies).extracting("code", String.class).containsAnyElementsOf(codes);
+	}
 	
 	@Test
 	public void getBanksTest() {

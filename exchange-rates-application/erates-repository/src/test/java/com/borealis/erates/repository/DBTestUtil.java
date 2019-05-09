@@ -10,13 +10,13 @@ import com.borealis.erates.repository.model.dbo.ExchangeRateDbo;
 /**
  * @author Kastalski Sergey
  */
-class DBTestUtil {
+public class DBTestUtil {
 	
-	static BankDbo createBank(final String code, final boolean active) {
+	public static BankDbo createBank(final String code, final boolean active) {
 		return createBank(null, code, active);
 	}
 	
-	static BankDbo createBank(final Long id, final String code, final boolean active) {
+	public static BankDbo createBank(final Long id, final String code, final boolean active) {
 		final BankDbo bank = new BankDbo();
 		if (id != null) {
 			bank.setId(id);
@@ -26,13 +26,13 @@ class DBTestUtil {
 		return bank;
 	}
 
-	static CurrencyDbo createCurrency(final String code) {
+	public static CurrencyDbo createCurrency(final String code) {
 		final CurrencyDbo currency = new CurrencyDbo();
 		currency.setCode(code);
 		return currency;
 	}
 	
-	static ExchangeRateDbo createExchangeRate(
+	public static ExchangeRateDbo createExchangeRate(
 			final String buyRate, 
 			final String sellRate, 
 			final CurrencyDbo currency, 
