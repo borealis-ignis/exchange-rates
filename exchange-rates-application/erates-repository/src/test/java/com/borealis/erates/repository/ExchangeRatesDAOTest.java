@@ -26,7 +26,6 @@ import com.borealis.erates.repository.model.dbo.ExchangeRateDbo;
  */
 @RunWith(SpringRunner.class)
 @DataJpaTest(showSql = true, properties = { 
-		"spring.jpa.properties.hibernate.generate_statistics=true",
 		"spring.jpa.properties.hibernate.jdbc.batch_size=20", 
 		"spring.jpa.properties.hibernate.order_inserts=true"
 		})

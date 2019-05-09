@@ -5,22 +5,23 @@ import java.util.List;
 import com.borealis.erates.model.dto.CurrencyDto;
 import com.borealis.erates.model.dto.ExchangeRateDto;
 import com.borealis.erates.supplier.exception.RatesProcessingException;
+import com.borealis.erates.transport.HttpResponse;
 
 /**
  * @author Kastalski Sergey
  */
 public abstract class AbstractBankProcessor {
 	
-	protected abstract String sendRequest() throws RatesProcessingException;
+	protected abstract HttpResponse sendRequest() throws RatesProcessingException;
 	
 	protected abstract List<ExchangeRateDto> parse(final String content, final List<CurrencyDto> currencyCodes) throws RatesProcessingException;
 	
 	public abstract String getBankCode();
 	
-	public List<ExchangeRateDto> process(final List<CurrencyDto> currencyCodes) throws RatesProcessingException {
+	public List<ExchangeRateDto> process(final List<CurrencyDto> currencies) throws RatesProcessingException {
 		final String content;
 		try {
-			content = sendRequest();
+			content = sendRequest().getBody();
 		} catch (final RatesProcessingException e) {
 			throw e;
 		} catch (final Exception e) {
@@ -28,7 +29,7 @@ public abstract class AbstractBankProcessor {
 		}
 		
 		try {
-			return parse(content, currencyCodes);
+			return parse(content, currencies);
 		} catch (final RatesProcessingException e) {
 			throw e;
 		} catch (final Exception e) {

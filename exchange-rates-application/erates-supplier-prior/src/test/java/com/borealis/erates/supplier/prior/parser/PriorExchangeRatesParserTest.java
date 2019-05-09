@@ -2,11 +2,9 @@ package com.borealis.erates.supplier.prior.parser;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.borealis.erates.TestDataContainer;
+import com.borealis.erates.TestIOUtil;
 import com.borealis.erates.model.dto.CurrencyDto;
 import com.borealis.erates.model.dto.ExchangeRateDto;
 import com.borealis.erates.supplier.exception.RatesProcessingException;
@@ -35,7 +34,7 @@ public class PriorExchangeRatesParserTest {
 		currencies.add(TestDataContainer.getUSDCurrencyDto(true));
 		currencies.add(TestDataContainer.getEURCurrencyDto(true));
 		
-		final String content = readFile("com/borealis/erates/supplier/prior/parser/correct_response.json");
+		final String content = TestIOUtil.readFile("com/borealis/erates/supplier/prior/parser/correct_response.json");
 		
 		final List<ExchangeRateDto> rates = parser.parse(content, currencies);
 		
@@ -51,7 +50,7 @@ public class PriorExchangeRatesParserTest {
 		final List<CurrencyDto> currencies = new ArrayList<>();
 		currencies.add(TestDataContainer.getEURCurrencyDto(true));
 		
-		final String content = readFile("com/borealis/erates/supplier/prior/parser/response_with_bad_titles.json");
+		final String content = TestIOUtil.readFile("com/borealis/erates/supplier/prior/parser/response_with_bad_titles.json");
 		
 		final List<ExchangeRateDto> rates = parser.parse(content, currencies);
 		assertThat(rates).isEmpty();
@@ -64,7 +63,7 @@ public class PriorExchangeRatesParserTest {
 		currency.setCode("Unknown");
 		currencies.add(currency);
 		
-		final String content = readFile("com/borealis/erates/supplier/prior/parser/correct_response.json");
+		final String content = TestIOUtil.readFile("com/borealis/erates/supplier/prior/parser/correct_response.json");
 		
 		final List<ExchangeRateDto> rates = parser.parse(content, currencies);
 		assertThat(rates).isEmpty();
@@ -75,7 +74,7 @@ public class PriorExchangeRatesParserTest {
 		final List<CurrencyDto> currencies = new ArrayList<>();
 		currencies.add(TestDataContainer.getEURCurrencyDto(true));
 		
-		final String content = readFile("com/borealis/erates/supplier/prior/parser/response_without_sellrates.json");
+		final String content = TestIOUtil.readFile("com/borealis/erates/supplier/prior/parser/response_without_sellrates.json");
 		
 		final List<ExchangeRateDto> rates = parser.parse(content, currencies);
 		assertThat(rates).isEmpty();
@@ -86,17 +85,9 @@ public class PriorExchangeRatesParserTest {
 		final List<CurrencyDto> currencies = new ArrayList<>();
 		currencies.add(TestDataContainer.getEURCurrencyDto(true));
 		
-		final String content = readFile("com/borealis/erates/supplier/prior/parser/bad_response.json");
+		final String content = TestIOUtil.readFile("com/borealis/erates/supplier/prior/parser/bad_response.json");
 		
 		parser.parse(content, currencies);
-	}
-	
-	private String readFile(final String path) {
-		try {
-			return IOUtils.toString(getClass().getClassLoader().getResourceAsStream(path), Charset.forName("UTF-8"));
-		} catch (final Exception e) {
-			throw new AssertionError("Can't read file '" + path + "'", e);
-		}
 	}
 	
 }

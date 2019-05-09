@@ -1,4 +1,4 @@
-package com.borealis.erates.supplier;
+package com.borealis.erates.transport;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,11 +24,11 @@ public class HttpTransport {
 	
 	private final static CloseableHttpClient httpclient = HttpClients.createDefault();
 	
-	public String sendPost(final String url) throws RatesProcessingException {
+	public HttpResponse sendPost(final String url) throws RatesProcessingException {
 		return sendPost(url, null);
 	}
 	
-	public String sendPost(final String url, final String body) throws RatesProcessingException {
+	public HttpResponse sendPost(final String url, final String body) throws RatesProcessingException {
 		final HttpPost http = new HttpPost(url);
 		if (body != null) {
 			http.setEntity(new StringEntity(body, Charset.forName("UTF-8")));
@@ -36,14 +36,20 @@ public class HttpTransport {
 		return sendRequest(http);
 	}
 	
-	public String sendGet(final String url) throws RatesProcessingException {
+	public HttpResponse sendGet(final String url) throws RatesProcessingException {
 		return sendRequest(new HttpGet(url));
 	}
 	
-	private String sendRequest(final HttpUriRequest http) throws RatesProcessingException {
+	private HttpResponse sendRequest(final HttpUriRequest http) throws RatesProcessingException {
 		try (final CloseableHttpResponse response = httpclient.execute(http)) {
 			final InputStream contentStream = response.getEntity().getContent();
-			return IOUtils.toString(contentStream, Charset.forName("UTF-8"));
+			
+			final HttpResponse httpResponse = new HttpResponse();
+			httpResponse.setBody(IOUtils.toString(contentStream, Charset.forName("UTF-8")));
+			httpResponse.setStatus(response.getStatusLine().getStatusCode());
+			httpResponse.setHeaders(response.getAllHeaders());
+			
+			return httpResponse;
 		} catch (final IOException e) {
 			throw new RatesProcessingException("Failed http-request", e);
 		}

@@ -10,10 +10,11 @@ import com.borealis.erates.model.dto.ExchangeRateDto;
 import com.borealis.erates.repository.BanksDAO;
 import com.borealis.erates.repository.converter.impl.BankConverter;
 import com.borealis.erates.supplier.Bank;
-import com.borealis.erates.supplier.HttpTransport;
 import com.borealis.erates.supplier.AbstractBankProcessor;
 import com.borealis.erates.supplier.exception.RatesProcessingException;
 import com.borealis.erates.supplier.prior.parser.PriorExchangeRatesParser;
+import com.borealis.erates.transport.HttpResponse;
+import com.borealis.erates.transport.HttpTransport;
 
 /**
  * @author Kastalski Sergey
@@ -58,13 +59,13 @@ public class PriorBank extends AbstractBankProcessor implements Bank {
 	}
 	
 	@Override
-	protected String sendRequest() throws RatesProcessingException {
+	protected HttpResponse sendRequest() throws RatesProcessingException {
 		return transport.sendPost(url);
 	}
 
 	@Override
-	protected List<ExchangeRateDto> parse(final String content, final List<CurrencyDto> currencyCodes) throws RatesProcessingException {
-		return parser.parse(content, currencyCodes);
+	protected List<ExchangeRateDto> parse(final String content, final List<CurrencyDto> currencies) throws RatesProcessingException {
+		return parser.parse(content, currencies);
 	}
 	
 }
