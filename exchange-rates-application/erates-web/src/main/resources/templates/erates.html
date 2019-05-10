@@ -8,6 +8,8 @@
 	</script>
 	<script th:src="@{/js/jquery.flot/jquery.js}">
 	</script>
+	<script th:src="@{/js/erates.js}">
+	</script>
 </head>
 <body>
 	<div class="container">
@@ -17,6 +19,9 @@
 			</ul>
 		</div>
 		<div id="charts_container">
+			<div id="topPanel">
+				<div class="currency-button" th:each="currency : ${currencies}" th:text="${currency.code}" th:id="${currency.id}" th:classappend="${currency.code == currencyCode}?active"></div>
+			</div>
 			<div id="chart"></div>
 		</div>
 	</div>

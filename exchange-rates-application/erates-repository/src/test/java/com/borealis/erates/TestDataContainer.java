@@ -67,6 +67,16 @@ public abstract class TestDataContainer {
 		return dto;
 	}
 	
+	public static CurrencyDto getRUBCurrencyDto(final boolean withId) {
+		final CurrencyDto dto = new CurrencyDto();
+		if (withId) {
+			dto.setId(3l);
+		}
+		dto.setCode("RUB");
+		
+		return dto;
+	}
+	
 	public static CurrencyDbo getCurrencyDbo(final boolean withId) {
 		final CurrencyDbo dbo = new CurrencyDbo();
 		if (withId) {

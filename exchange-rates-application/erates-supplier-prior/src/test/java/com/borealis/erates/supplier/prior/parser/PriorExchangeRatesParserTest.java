@@ -33,6 +33,7 @@ public class PriorExchangeRatesParserTest {
 		final List<CurrencyDto> currencies = new ArrayList<>();
 		currencies.add(TestDataContainer.getUSDCurrencyDto(true));
 		currencies.add(TestDataContainer.getEURCurrencyDto(true));
+		currencies.add(TestDataContainer.getRUBCurrencyDto(true));
 		
 		final String content = TestIOUtil.readFile("com/borealis/erates/supplier/prior/parser/correct_response.json");
 		

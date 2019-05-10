@@ -27,7 +27,7 @@ public class ERatesRestController {
 		this.eratesService = eratesService;
 	}
 	
-	@GetMapping
+	@GetMapping("/")
 	public List<ExchangeRateDto> getExchangeRates(@RequestParam(required = false, name = "currencyId") final Long currencyId) {
 		final LocalDateTime defaultFromDate = LocalDateTime.now().minusMonths(1l);
 		return eratesService.getExchangeRates(defaultFromDate, currencyId);

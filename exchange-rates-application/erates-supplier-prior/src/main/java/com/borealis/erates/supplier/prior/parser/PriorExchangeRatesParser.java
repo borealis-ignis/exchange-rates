@@ -73,8 +73,8 @@ public class PriorExchangeRatesParser {
 					}
 					
 					final ExchangeRateDto exchangeRate = new ExchangeRateDto();
-					exchangeRate.setBuyRate(buyRate);
-					exchangeRate.setSellRate(sellRate);
+					exchangeRate.setBuyRate(recalcRate(buyRate, currency.getCode()));
+					exchangeRate.setSellRate(recalcRate(sellRate, currency.getCode()));
 					exchangeRate.setCurrency(currency);
 					exchangeRate.setUpdateDate(updateDate);
 					
@@ -86,6 +86,13 @@ public class PriorExchangeRatesParser {
 		return exchangeRates;
 	}
 	
+	private BigDecimal recalcRate(final BigDecimal rate, final String currencyCode) {
+		if ("RUB".equals(currencyCode)) {
+			return rate.divide(BigDecimal.valueOf(100));
+		}
+		return rate;
+	}
+	
 	private int findIndex(final Element titlesColumn, final String currencyCode) {
 		final Elements titles = titlesColumn.select("p span.value");
 		if (titles == null || titles.isEmpty()) {
@@ -93,7 +100,7 @@ public class PriorExchangeRatesParser {
 		}
 		
 		for (int index = 0; index < titles.size(); index++) {
-			final String title = titles.get(index).text();
+			final String title = titles.get(index).ownText().trim();
 			if (currencyCode.equals(title)) {
 				return index;
 			}
