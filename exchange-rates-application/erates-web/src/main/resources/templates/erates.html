@@ -4,12 +4,11 @@
 	<title>Exchange Rates</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link rel="stylesheet" th:href="@{/css/erates.css}" />
-	<script th:src="@{/js/jquery.flot/excanvas.min.js}">
-	</script>
-	<script th:src="@{/js/jquery.flot/jquery.js}">
-	</script>
-	<script th:src="@{/js/erates.js}">
-	</script>
+	<script th:src="@{/js/jquery.flot/excanvas.min.js}"></script>
+	<script th:src="@{/js/jquery.flot/jquery.js}"></script>
+	<script th:src="@{/js/jquery.flot/jquery.flot.js}"></script>
+	<script th:src="@{/js/jquery.flot/jquery.flot.time.js}"></script>
+	<script th:src="@{/js/erates.js}"></script>
 </head>
 <body>
 	<div class="container">
@@ -22,8 +21,10 @@
 			<div id="topPanel">
 				<div class="currency-button" th:each="currency : ${currencies}" th:text="${currency.code}" th:id="${currency.id}" th:classappend="${currency.code == currencyCode}?active"></div>
 			</div>
+			<div id="legendContainer"></div>
 			<div id="chart"></div>
 		</div>
 	</div>
+	<input type="hidden" id="ctx" th:value="@{/}"/>
 </body>
 </html>
