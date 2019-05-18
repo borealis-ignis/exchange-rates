@@ -2,15 +2,15 @@ package com.borealis.erates.updater.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.annotation.PropertySources;
+
+import com.borealis.erates.io.ExternalPropertySourceFactory;
+import com.borealis.erates.io.PropertyFiles;
 
 /**
  * @author Kastalski Sergey
  */
 @Configuration
-@PropertySources({
-	@PropertySource(value="classpath:updater.properties", ignoreResourceNotFound=true)
-})
+@PropertySource(value="classpath:" + PropertyFiles.UPDATER_PROPERTIES, ignoreResourceNotFound=true, factory=ExternalPropertySourceFactory.class)
 public class UpdaterConfiguration {
 	
 }

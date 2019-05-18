@@ -2,15 +2,15 @@ package com.borealis.erates.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.annotation.PropertySources;
+
+import com.borealis.erates.io.ExternalPropertySourceFactory;
+import com.borealis.erates.io.PropertyFiles;
 
 /**
  * @author Kastalski Sergey
  */
 @Configuration
-@PropertySources({
-	@PropertySource(value="classpath:application.properties", ignoreResourceNotFound=true)
-})
+@PropertySource(value="classpath:" + PropertyFiles.ERATES_PROPERTIES, ignoreResourceNotFound=true, factory=ExternalPropertySourceFactory.class)
 public class ApplicationConfiguration {
 	
 }
