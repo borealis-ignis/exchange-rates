@@ -22,6 +22,7 @@ import com.borealis.erates.repository.ExchangeRatesDAO;
 import com.borealis.erates.repository.converter.impl.BankConverter;
 import com.borealis.erates.repository.converter.impl.CurrencyConverter;
 import com.borealis.erates.repository.converter.impl.ExchangeRateConverter;
+import com.borealis.erates.repository.model.dbo.BankDbo;
 import com.borealis.erates.repository.model.dbo.ExchangeRateDbo;
 import com.borealis.erates.supplier.AbstractBankProcessor;
 import com.borealis.erates.supplier.exception.RatesProcessingException;
@@ -102,12 +103,12 @@ public class ExchangeRatesUpdaterService {
 				erate.getSellRate() != null &&
 				erate.getCurrency() != null &&
 				erate.getUpdateDate() != null &&
-				erate.getUpdateDate().isAfter(lastUpdateDate))
+				(lastUpdateDate == null || erate.getUpdateDate().isAfter(lastUpdateDate)))
 			.collect(Collectors.toList());
 			
 			filteredExchangeRates.forEach(erate -> erate.setBank(getBank(bankCode)));
 			
-			exchangeRates.addAll(filteredExchangeRates);
+			exchangeRates.addAll(filteredExchangeRates.stream().filter(erate -> erate.getBank() != null).collect(Collectors.toList()));
 		});
 		
 		if (!exchangeRates.isEmpty()) {
@@ -123,7 +124,12 @@ public class ExchangeRatesUpdaterService {
 	private BankDto getBank(final String bankCode) {
 		BankDto bank = banksMap.get(bankCode);
 		if (bank == null) {
-			bank = bankConverter.convertDbo(banksDAO.findByCode(bankCode));
+			final BankDbo bankDbo = banksDAO.findByCode(bankCode);
+			if (bankDbo == null) {
+				logger.warn("Bank with code \"" + bankCode + "\" is not found in DB");
+				return null;
+			}
+			bank = bankConverter.convertDbo(bankDbo);
 			banksMap.put(bankCode, bank);
 		}
 		return bank;

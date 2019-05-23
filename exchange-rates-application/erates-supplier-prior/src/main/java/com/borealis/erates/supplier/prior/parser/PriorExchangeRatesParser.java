@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import com.borealis.erates.model.dto.CurrencyDto;
 import com.borealis.erates.model.dto.ExchangeRateDto;
 import com.borealis.erates.supplier.exception.RatesProcessingException;
+import com.borealis.erates.util.ExchangeRatesUtil;
 
 /**
  * @author Kastalski Sergey
@@ -25,6 +26,7 @@ import com.borealis.erates.supplier.exception.RatesProcessingException;
 public class PriorExchangeRatesParser {
 	
 	private final static DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("HH:mm,dd.MM.yyyy");
+	
 	
 	public List<ExchangeRateDto> parse(final String content, final List<CurrencyDto> currencies) throws RatesProcessingException {
 		final List<ExchangeRateDto> exchangeRates = new ArrayList<>();
@@ -73,8 +75,8 @@ public class PriorExchangeRatesParser {
 					}
 					
 					final ExchangeRateDto exchangeRate = new ExchangeRateDto();
-					exchangeRate.setBuyRate(recalcRate(buyRate, currency.getCode()));
-					exchangeRate.setSellRate(recalcRate(sellRate, currency.getCode()));
+					exchangeRate.setBuyRate(ExchangeRatesUtil.recalcRate(buyRate, currency.getCode()));
+					exchangeRate.setSellRate(ExchangeRatesUtil.recalcRate(sellRate, currency.getCode()));
 					exchangeRate.setCurrency(currency);
 					exchangeRate.setUpdateDate(updateDate);
 					
@@ -84,13 +86,6 @@ public class PriorExchangeRatesParser {
 		});
 		
 		return exchangeRates;
-	}
-	
-	private BigDecimal recalcRate(final BigDecimal rate, final String currencyCode) {
-		if ("RUB".equals(currencyCode)) {
-			return rate.divide(BigDecimal.valueOf(100));
-		}
-		return rate;
 	}
 	
 	private int findIndex(final Element titlesColumn, final String currencyCode) {

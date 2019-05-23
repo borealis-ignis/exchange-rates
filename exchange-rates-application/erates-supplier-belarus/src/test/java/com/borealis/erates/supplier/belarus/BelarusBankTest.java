@@ -1,12 +1,10 @@
-package com.borealis.erates.supplier.prior;
+package com.borealis.erates.supplier.belarus;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.http.Header;
-import org.apache.http.message.BasicHeader;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,49 +25,38 @@ import com.borealis.erates.transport.HttpResponse;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class PriorBankTest {
+public class BelarusBankTest {
 	
 	@Autowired
-	private PriorBank priorBank;
+	private BelarusBank belarusBank;
 	
 	@Test
-	public void priorBankDataTest() {
-		final Bank priorBankData = (Bank) priorBank;
+	public void belarusBankDataTest() {
+		final Bank belarusBankData = (Bank) belarusBank;
 		
-		assertThat(priorBankData.getBankCode()).isEqualTo("priorb");
-		assertThat(priorBankData.getBankName()).isEqualTo("Prior Bank");
+		assertThat(belarusBankData.getBankCode()).isEqualTo("belarusb");
+		assertThat(belarusBankData.getBankName()).isEqualTo("Belarus Bank");
 	}
 	
 	@Test
-	public void priorBankSendRequestTest() throws RatesProcessingException {
-		final HttpResponse response = priorBank.sendRequest();
+	public void belarusBankSendRequestTest() throws RatesProcessingException {
+		final HttpResponse response = belarusBank.sendRequest();
 		
-		final Header expectedHeader = new BasicHeader("Content-Type", "json;charset=utf-8");
-		
-		final Header[] headers = response.getHeaders();
-		boolean headerFound = false;
-		for (final Header header : headers) {
-			if (expectedHeader.getName().equals(header.getName())) {
-				headerFound = true;
-				assertThat(header.getValue()).isEqualTo(expectedHeader.getValue());
-			}
-		}
-		assertThat(headerFound).isTrue();
-		assertThat(headers).isNotEmpty();
 		assertThat(response.getStatus()).isEqualTo(200);
 		assertThat(response.getBody()).isNotBlank();
 	}
 	
 	@Test
-	public void priorBankParseTest() throws RatesProcessingException {
+	public void belarusBankParseTest() throws RatesProcessingException {
 		final List<CurrencyDto> currencies = new ArrayList<>();
 		currencies.add(TestDataContainer.getUSDCurrencyDto(true));
 		currencies.add(TestDataContainer.getEURCurrencyDto(true));
 		
-		final String content = TestIOUtil.readFile("com/borealis/erates/supplier/prior/parser/correct_response.json");
+		final String content = TestIOUtil.readFile("com/borealis/erates/supplier/belarus/parser/correct_response.html");
 		
-		final List<ExchangeRateDto> rates = priorBank.parse(content, currencies);
+		final List<ExchangeRateDto> rates = belarusBank.parse(content, currencies);
 		
 		ParserChecksUtil.checkOkResults(rates, currencies);
 	}
+	
 }

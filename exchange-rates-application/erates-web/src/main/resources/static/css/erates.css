@@ -14,12 +14,14 @@ html, body {
 }
 .container #banks_container ul.banks-items li {
 	list-style-type: none;
-	background-color: #fff;
 	padding: 8px 12px;
 	font-size: 14pt;
+	cursor: pointer;
+}
+.container #banks_container ul.banks-items li.active {
+	background-color: #fff;
 	cursor: default;
 }
-
 .container #charts_container {
 	float: left;
 	width: 1000px;

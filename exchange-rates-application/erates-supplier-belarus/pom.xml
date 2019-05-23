@@ -5,11 +5,11 @@
 		<artifactId>erates</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>erates-updater</artifactId>
+  	<artifactId>erates-supplier-belarus</artifactId>
 	<packaging>jar</packaging>
 	
-	<name>Updater-module</name>
-	<description>Exchange rates updater service</description>
+	<name>Belarus-module</name>
+	<description>Supplier Belarusbank module</description>
 	
 	<dependencies>
 		<dependency>
@@ -29,16 +29,6 @@
 		<dependency>
 			<groupId>com.borealis</groupId>
 			<artifactId>erates-repository</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.borealis</groupId>
-			<artifactId>erates-supplier-prior</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.borealis</groupId>
-			<artifactId>erates-supplier-belarus</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>

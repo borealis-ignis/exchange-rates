@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-  <name>erates-updater</name>
-  <comment>Exchange rates updater service. NO_M2ECLIPSE_SUPPORT: Project files created with the maven-eclipse-plugin are not supported in M2Eclipse.</comment>
+  <name>erates-supplier-belarus</name>
+  <comment>Supplier Belarusbank module. NO_M2ECLIPSE_SUPPORT: Project files created with the maven-eclipse-plugin are not supported in M2Eclipse.</comment>
   <projects>
     <project>erates-repository</project>
     <project>erates-common</project>
-    <project>erates-supplier-prior</project>
-    <project>erates-supplier-belarus</project>
   </projects>
   <buildSpec>
     <buildCommand>

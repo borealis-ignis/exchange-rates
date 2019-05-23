@@ -15,6 +15,7 @@ import com.borealis.erates.TestDataContainer;
 import com.borealis.erates.TestIOUtil;
 import com.borealis.erates.model.dto.CurrencyDto;
 import com.borealis.erates.model.dto.ExchangeRateDto;
+import com.borealis.erates.parsers.ParserChecksUtil;
 import com.borealis.erates.supplier.exception.RatesProcessingException;
 
 /**
@@ -39,11 +40,7 @@ public class PriorExchangeRatesParserTest {
 		
 		final List<ExchangeRateDto> rates = parser.parse(content, currencies);
 		
-		assertThat(rates).hasSameSizeAs(currencies)
-			.allMatch(exchangeRate -> currencies.contains(exchangeRate.getCurrency()), "Unacceptable Currency")
-			.allMatch(exchangeRate -> exchangeRate.getBuyRate() != null, "BuyRate can't be null")
-			.allMatch(exchangeRate -> exchangeRate.getSellRate() != null, "SellRate can't be null")
-			.allMatch(exchangeRate -> exchangeRate.getUpdateDate() != null, "UpdateDate can't be null");
+		ParserChecksUtil.checkOkResults(rates, currencies);
 	}
 	
 	@Test()

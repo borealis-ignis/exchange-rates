@@ -54,6 +54,7 @@
 		<module>erates-web</module>
 		<module>erates-service</module>
 		<module>erates-supplier-prior</module>
+		<module>erates-supplier-belarus</module>
 		<module>erates-repository</module>
 		<module>erates-updater</module>
 		<module>erates-common</module>

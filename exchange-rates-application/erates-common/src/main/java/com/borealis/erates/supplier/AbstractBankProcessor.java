@@ -14,7 +14,7 @@ public abstract class AbstractBankProcessor {
 	
 	protected abstract HttpResponse sendRequest() throws RatesProcessingException;
 	
-	protected abstract List<ExchangeRateDto> parse(final String content, final List<CurrencyDto> currencyCodes) throws RatesProcessingException;
+	protected abstract List<ExchangeRateDto> parse(final String content, final List<CurrencyDto> currencies) throws RatesProcessingException;
 	
 	public abstract String getBankCode();
 	

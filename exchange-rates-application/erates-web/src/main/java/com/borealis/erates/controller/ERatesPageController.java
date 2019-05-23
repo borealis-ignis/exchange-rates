@@ -31,13 +31,14 @@ public class ERatesPageController {
 	}
 	
 	@GetMapping(path="/erates")
-	public String getSingleRecipePage(
+	public String getExchangeRatesPage(
 			final Map<String, Object> model,
 			@RequestParam(required = false, name = "bankCode") String bankCode) {
 		
 		final List<Bank> banks = eratesService.getBanks();
 		if (StringUtils.isBlank(bankCode)) {
-			bankCode = banks.stream().findFirst().orElse(new NoBank()).getBankCode();
+			bankCode = banks.stream().filter(b -> "priorb".equals(b.getBankCode())).findFirst()
+				.orElse(banks.stream().findFirst().orElse(new NoBank())).getBankCode();
 		}
 		
 		final List<CurrencyDto> currencies = eratesService.getCurrencies();
