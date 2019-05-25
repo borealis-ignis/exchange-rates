@@ -11,12 +11,15 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.jdbc.EmbeddedDatabaseConnection;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.borealis.erates.TestExchangeRatesApplication;
 import com.borealis.erates.repository.model.dbo.BankDbo;
 import com.borealis.erates.repository.model.dbo.CurrencyDbo;
 import com.borealis.erates.repository.model.dbo.ExchangeRateDbo;
@@ -30,6 +33,8 @@ import com.borealis.erates.repository.model.dbo.ExchangeRateDbo;
 		"spring.jpa.properties.hibernate.order_inserts=true"
 		})
 @AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
+@ContextConfiguration(classes = TestExchangeRatesApplication.class)
+@EnableAutoConfiguration
 public class ExchangeRatesDAOTest {
 	
 	@Autowired

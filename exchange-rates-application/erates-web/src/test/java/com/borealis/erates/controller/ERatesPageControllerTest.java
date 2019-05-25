@@ -56,7 +56,7 @@ public class ERatesPageControllerTest {
 	
 	
 	@Test
-	public void getSingleRecipePageTest() throws Exception {
+	public void getExchangeRatesPageTest() throws Exception {
 		final List<Bank> banks = new ArrayList<>();
 		banks.add(prior);
 		
@@ -79,7 +79,7 @@ public class ERatesPageControllerTest {
 	}
 	
 	@Test
-	public void getSingleRecipePageNoUSDTest() throws Exception {
+	public void getExchangeRatesPageNoUSDTest() throws Exception {
 		final List<Bank> banks = new ArrayList<>();
 		banks.add(prior);
 		
@@ -101,7 +101,7 @@ public class ERatesPageControllerTest {
 	}
 	
 	@Test
-	public void getSingleRecipePageNoCurrenciesTest() throws Exception {
+	public void getExchangeRatesPageNoCurrenciesTest() throws Exception {
 		final List<Bank> banks = new ArrayList<>();
 		banks.add(prior);
 		
@@ -121,7 +121,7 @@ public class ERatesPageControllerTest {
 	}
 	
 	@Test
-	public void getSingleRecipePageNoBanksTest() throws Exception {
+	public void getExchangeRatesPageNoBanksTest() throws Exception {
 		final List<Bank> banks = new ArrayList<>();
 		
 		final List<CurrencyDto> currencies = new ArrayList<>();
@@ -143,7 +143,7 @@ public class ERatesPageControllerTest {
 	}
 	
 	@Test
-	public void getSingleRecipePageExceptionTest() throws Exception {
+	public void getExchangeRatesPageExceptionTest() throws Exception {
 		final List<Bank> banks = new ArrayList<>();
 		
 		when(eratesService.getBanks()).thenReturn(banks);

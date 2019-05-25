@@ -19,6 +19,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.borealis.erates.TestDataContainer;
+import com.borealis.erates.TestExchangeRatesApplication;
 import com.borealis.erates.model.dto.CurrencyDto;
 import com.borealis.erates.model.dto.ExchangeRateDto;
 import com.borealis.erates.repository.BanksDAO;
@@ -35,7 +36,7 @@ import com.borealis.erates.supplier.Bank;
  * @author Kastalski Sergey
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest(classes = TestExchangeRatesApplication.class)
 @ActiveProfiles("test")
 public class ExchangeRatesServiceTest {
 	

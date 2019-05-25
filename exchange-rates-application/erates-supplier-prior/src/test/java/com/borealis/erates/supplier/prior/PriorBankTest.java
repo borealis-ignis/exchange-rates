@@ -11,9 +11,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.borealis.erates.TestDataContainer;
+import com.borealis.erates.TestExchangeRatesApplication;
 import com.borealis.erates.TestIOUtil;
 import com.borealis.erates.model.dto.CurrencyDto;
 import com.borealis.erates.model.dto.ExchangeRateDto;
@@ -26,7 +28,8 @@ import com.borealis.erates.transport.HttpResponse;
  * @author Kastalski Sergey
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest(classes = TestExchangeRatesApplication.class)
+@ActiveProfiles("test")
 public class PriorBankTest {
 	
 	@Autowired

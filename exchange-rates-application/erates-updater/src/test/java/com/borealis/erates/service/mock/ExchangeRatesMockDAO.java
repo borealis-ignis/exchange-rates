@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,6 +22,7 @@ import com.borealis.erates.repository.model.dbo.ExchangeRateDbo;
  * @author Kastalski Sergey
  */
 @Component
+@Profile("test")
 public class ExchangeRatesMockDAO implements ExchangeRatesDAO {
 	
 	@Autowired

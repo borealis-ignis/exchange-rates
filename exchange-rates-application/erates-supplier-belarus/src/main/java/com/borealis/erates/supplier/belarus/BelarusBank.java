@@ -31,9 +31,9 @@ public class BelarusBank extends AbstractBankProcessor implements Bank {
 	private BelarusExchangeRatesParser parser;
 	
 	public BelarusBank(
-			@Value("${bank.belarus.name}") final String bankName,
-			@Value("${bank.belarus.code}") final String bankCode,
-			@Value("${bank.belarus.rates.url}") final String url,
+			@Value("${bank.belarus.name:}") final String bankName,
+			@Value("${bank.belarus.code:}") final String bankCode,
+			@Value("${bank.belarus.rates.url:}") final String url,
 			final HttpTransport transport,
 			final BelarusExchangeRatesParser parser) {
 		this.name = bankName;

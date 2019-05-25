@@ -6,15 +6,18 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.borealis.erates.TestExchangeRatesApplication;
 import com.borealis.erates.supplier.exception.RatesProcessingException;
 
 /**
  * @author Kastalski Sergey
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest(classes = TestExchangeRatesApplication.class)
+@ActiveProfiles("test")
 public class HttpTransportTest {
 	
 	@Autowired

@@ -32,9 +32,9 @@ public class PriorBank extends AbstractBankProcessor implements Bank {
 	
 	
 	public PriorBank(
-			@Value("${bank.prior.name}") final String bankName,
-			@Value("${bank.prior.code}") final String bankCode,
-			@Value("${bank.prior.rates.url}") final String url,
+			@Value("${bank.prior.name:}") final String bankName,
+			@Value("${bank.prior.code:}") final String bankCode,
+			@Value("${bank.prior.rates.url:}") final String url,
 			final HttpTransport transport,
 			final PriorExchangeRatesParser parser) {
 		this.name = bankName;

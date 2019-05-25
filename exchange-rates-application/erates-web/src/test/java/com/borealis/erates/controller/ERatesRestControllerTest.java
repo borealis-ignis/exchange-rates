@@ -27,7 +27,7 @@ import net.minidev.json.JSONArray;
  * @author Kastalski Sergey
  */
 @RunWith(SpringRunner.class)
-@WebMvcTest(ERatesRestController.class)
+@WebMvcTest(controllers = ERatesRestController.class)
 public class ERatesRestControllerTest {
 	
 	@Autowired
