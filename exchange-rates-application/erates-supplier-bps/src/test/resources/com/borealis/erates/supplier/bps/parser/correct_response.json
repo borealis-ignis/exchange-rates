@@ -1,0 +1,58 @@
+{
+    "date": 1558972800000,
+    "prevDate": 1558947600000,
+    "nextDate": null,
+    "idBranch": "369-777",
+    "branches": null,
+    "rates": {
+        "list": [
+            {
+                "rateType": "RATE",
+                "iso": "USD",
+                "iso2": null,
+                "buy": 2.06,
+                "deltaBuy": -0.01100000000000012,
+                "sale": 2.09,
+                "deltaSale": 0.008999999999999897,
+                "minsum": null,
+                "maxsum": null,
+                "scale": null,
+                "rate": null,
+                "deltaRate": null
+            },
+            {
+                "rateType": "RATE",
+                "iso": "EUR",
+                "iso2": null,
+                "buy": 2.31,
+                "deltaBuy": -0.01100000000000012,
+                "sale": 2.34,
+                "deltaSale": 0.008999999999999897,
+                "minsum": null,
+                "maxsum": null,
+                "scale": null,
+                "rate": null,
+                "deltaRate": null
+            },
+            {
+                "rateType": "RATE",
+                "iso": "RUB",
+                "iso2": null,
+                "buy": 3.18,
+                "deltaBuy": -0.02400000000000002,
+                "sale": 3.25,
+                "deltaSale": 0.019000000000000128,
+                "minsum": null,
+                "maxsum": null,
+                "scale": 100,
+                "rate": null,
+                "deltaRate": null
+            }
+        ]
+    },
+    "errorInfo": {
+        "errorCode": "0",
+        "errorDescription": null
+    },
+    "typeId": 13102
+}

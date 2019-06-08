@@ -5,11 +5,11 @@
 		<artifactId>erates</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>erates-updater</artifactId>
+  	<artifactId>erates-supplier-belapb</artifactId>
 	<packaging>jar</packaging>
 	
-	<name>Updater-module</name>
-	<description>Exchange rates updater service</description>
+	<name>BelAgroPromBank-module</name>
+	<description>Supplier BelAgroProm Bank module</description>
 	
 	<dependencies>
 		<dependency>
@@ -34,31 +34,6 @@
 		<dependency>
 			<groupId>com.borealis</groupId>
 			<artifactId>erates-repository</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.borealis</groupId>
-			<artifactId>erates-supplier-prior</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.borealis</groupId>
-			<artifactId>erates-supplier-belarus</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.borealis</groupId>
-			<artifactId>erates-supplier-bps</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.borealis</groupId>
-			<artifactId>erates-supplier-belswiss</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.borealis</groupId>
-			<artifactId>erates-supplier-belapb</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>

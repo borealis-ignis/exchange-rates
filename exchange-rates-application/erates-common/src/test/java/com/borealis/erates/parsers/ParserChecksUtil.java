@@ -17,7 +17,10 @@ public abstract class ParserChecksUtil {
 			.allMatch(exchangeRate -> currencies.contains(exchangeRate.getCurrency()), "Unacceptable Currency")
 			.allMatch(exchangeRate -> exchangeRate.getBuyRate() != null, "BuyRate can't be null")
 			.allMatch(exchangeRate -> exchangeRate.getSellRate() != null, "SellRate can't be null")
-			.allMatch(exchangeRate -> exchangeRate.getUpdateDate() != null, "UpdateDate can't be null");
+			.allMatch(exchangeRate -> exchangeRate.getUpdateDate() != null, "UpdateDate can't be null")
+			.allSatisfy(rate -> {
+				assertThat(rate.getBuyRate()).isLessThan(rate.getSellRate());
+			});
 	}
 	
 }

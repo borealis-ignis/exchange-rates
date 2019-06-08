@@ -55,6 +55,9 @@
 		<module>erates-service</module>
 		<module>erates-supplier-prior</module>
 		<module>erates-supplier-belarus</module>
+		<module>erates-supplier-bps</module>
+		<module>erates-supplier-belswiss</module>
+		<module>erates-supplier-belapb</module>
 		<module>erates-repository</module>
 		<module>erates-updater</module>
 		<module>erates-common</module>

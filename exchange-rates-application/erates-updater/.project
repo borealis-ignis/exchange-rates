@@ -7,6 +7,9 @@
     <project>erates-common</project>
     <project>erates-supplier-prior</project>
     <project>erates-supplier-belarus</project>
+    <project>erates-supplier-bps</project>
+    <project>erates-supplier-belswiss</project>
+    <project>erates-supplier-belapb</project>
   </projects>
   <buildSpec>
     <buildCommand>

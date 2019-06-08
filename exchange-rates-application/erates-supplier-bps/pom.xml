@@ -5,11 +5,11 @@
 		<artifactId>erates</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>erates-updater</artifactId>
+  	<artifactId>erates-supplier-bps</artifactId>
 	<packaging>jar</packaging>
 	
-	<name>Updater-module</name>
-	<description>Exchange rates updater service</description>
+	<name>bps-Sberbank-module</name>
+	<description>Supplier bps-Sberbank module</description>
 	
 	<dependencies>
 		<dependency>
@@ -37,31 +37,6 @@
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>com.borealis</groupId>
-			<artifactId>erates-supplier-prior</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.borealis</groupId>
-			<artifactId>erates-supplier-belarus</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.borealis</groupId>
-			<artifactId>erates-supplier-bps</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.borealis</groupId>
-			<artifactId>erates-supplier-belswiss</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.borealis</groupId>
-			<artifactId>erates-supplier-belapb</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
@@ -75,6 +50,10 @@
 					<artifactId>jsonassert</artifactId>
 				</exclusion>
 			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
 		</dependency>
 	</dependencies>
 </project>

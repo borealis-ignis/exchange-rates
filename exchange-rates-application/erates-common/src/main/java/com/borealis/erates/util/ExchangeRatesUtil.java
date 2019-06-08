@@ -1,6 +1,11 @@
 package com.borealis.erates.util;
 
 import java.math.BigDecimal;
+import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
+
+import com.borealis.erates.model.dto.CurrencyDto;
 
 /**
  * @author Kastalski Sergey
@@ -12,6 +17,19 @@ public abstract class ExchangeRatesUtil {
 			return rate.divide(BigDecimal.valueOf(100));
 		}
 		return rate;
+	}
+	
+	public static CurrencyDto findCurrency(final String currencyCode, final List<CurrencyDto> currencies) {
+		if (StringUtils.isBlank(currencyCode)) {
+			return null;
+		}
+		
+		for (final CurrencyDto currency : currencies) {
+			if (currencyCode.equals(currency.getCode())) {
+				return currency;
+			}
+		}
+		return null;
 	}
 	
 }
