@@ -16,8 +16,8 @@ import com.borealis.erates.supplier.belapb.parser.BelapbExchangeRatesParser;
 import com.borealis.erates.supplier.exception.RatesProcessingException;
 import com.borealis.erates.transport.HttpResponse;
 import com.borealis.erates.transport.HttpTransport;
+import com.borealis.erates.util.Pair;
 
-import javafx.util.Pair;
 
 /**
  * @author Kastalski Sergey
