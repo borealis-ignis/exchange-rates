@@ -16,12 +16,15 @@ import com.borealis.erates.repository.model.dbo.ExchangeRateDbo;
 public interface ExchangeRatesDAO extends JpaRepository<ExchangeRateDbo, Long> {
 	
 	@Query("select r.updateDate from ExchangeRateDbo r inner join r.bank b where b.code = :bankCode order by r.updateDate desc")
-	List<LocalDateTime> findDateTimeListByBankCode(@Param("bankCode") String bankCode, final Pageable pageable);
+	List<LocalDateTime> findDateTimeListByBankCode(@Param("bankCode") String bankCode, Pageable pageable);
 	
 	@Query("select r from ExchangeRateDbo r where r.updateDate >= :from")
 	List<ExchangeRateDbo> findAllByDate(@Param("from") LocalDateTime from);
 	
 	@Query("select r from ExchangeRateDbo r inner join r.currency c where r.updateDate >= :from and c.id = :currencyId")
 	List<ExchangeRateDbo> findAllByDateAndCurrency(@Param("from") LocalDateTime from, @Param("currencyId") Long currencyId);
+	
+	@Query("select r from ExchangeRateDbo r where r.updateDate >= CURRENT_DATE and r.bank.id = :bankId and r.currency.id = :currencyId order by r.updateDate desc")
+	List<ExchangeRateDbo> lastExchangeRate(@Param("bankId") Long bankId, @Param("currencyId") Long currencyId, Pageable pageable);
 	
 }

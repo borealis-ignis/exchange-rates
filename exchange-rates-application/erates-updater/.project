@@ -10,6 +10,7 @@
     <project>erates-supplier-bps</project>
     <project>erates-supplier-belswiss</project>
     <project>erates-supplier-belapb</project>
+    <project>erates-supplier-nbrb</project>
   </projects>
   <buildSpec>
     <buildCommand>

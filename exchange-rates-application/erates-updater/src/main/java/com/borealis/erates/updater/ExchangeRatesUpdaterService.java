@@ -3,10 +3,11 @@ package com.borealis.erates.updater;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
+import org.apache.commons.lang3.BooleanUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.PageRequest;
@@ -79,12 +80,16 @@ public class ExchangeRatesUpdaterService {
 		}
 		
 		final List<ExchangeRateDto> exchangeRates = new ArrayList<>();
-		
 		processors.forEach(p -> {
+			final BankDto bank = getBank(p.getBankCode());
+			if (bank == null || BooleanUtils.isFalse(bank.getActive())) {
+				return;
+			}
+			
 			final List<ExchangeRateDto> currentExchangeRates;
 			try {
 				currentExchangeRates = p.process(currencies);
-			} catch (final RatesProcessingException e) {
+			} catch (final RatesProcessingException | RuntimeException e) {
 				logger.error("Processing was failed for " + p, e);
 				return;
 			}
@@ -94,21 +99,27 @@ public class ExchangeRatesUpdaterService {
 				return;
 			}
 			
-			final String bankCode = p.getBankCode();
-			final List<LocalDateTime> sortedUpdateDates = exchangeRatesDAO.findDateTimeListByBankCode(bankCode, PageRequest.of(0, 1));
+			final List<LocalDateTime> sortedUpdateDates = exchangeRatesDAO.findDateTimeListByBankCode(bank.getCode(), PageRequest.of(0, 1));
 			final LocalDateTime lastUpdateDate = sortedUpdateDates.stream().findFirst().orElse(null);
 			
-			final List<ExchangeRateDto> filteredExchangeRates = currentExchangeRates.stream().filter(erate -> 
-				erate.getBuyRate() != null &&
-				erate.getSellRate() != null &&
-				erate.getCurrency() != null &&
-				erate.getUpdateDate() != null &&
-				(lastUpdateDate == null || erate.getUpdateDate().isAfter(lastUpdateDate)))
-			.collect(Collectors.toList());
+			final Iterator<ExchangeRateDto> erateIterator = currentExchangeRates.iterator();
+			while (erateIterator.hasNext()) {
+				final ExchangeRateDto erate = erateIterator.next();
+				if (erate.getBuyRate() != null &&
+						erate.getSellRate() != null &&
+						erate.getCurrency() != null &&
+						erate.getUpdateDate() != null &&
+						(lastUpdateDate == null || erate.getUpdateDate().isAfter(lastUpdateDate))) {
+					final ExchangeRateDbo lastErate = getLastExchangeRate(bank.getId(), erate.getCurrency().getId());
+					if (lastErate == null || erate.getBuyRate().compareTo(lastErate.getBuyRate()) != 0 || erate.getSellRate().compareTo(lastErate.getSellRate()) != 0) {
+						erate.setBank(bank);
+						continue;
+					}
+				}
+				erateIterator.remove();
+			}
 			
-			filteredExchangeRates.forEach(erate -> erate.setBank(getBank(bankCode)));
-			
-			exchangeRates.addAll(filteredExchangeRates.stream().filter(erate -> erate.getBank() != null).collect(Collectors.toList()));
+			exchangeRates.addAll(currentExchangeRates);
 		});
 		
 		if (!exchangeRates.isEmpty()) {
@@ -119,6 +130,15 @@ public class ExchangeRatesUpdaterService {
 			}
 			exchangeRatesDAO.flush();
 		}
+	}
+	
+	private ExchangeRateDbo getLastExchangeRate(final long bankId, final long currencyId) {
+		final List<ExchangeRateDbo> lastErates = exchangeRatesDAO.lastExchangeRate(bankId, currencyId, PageRequest.of(0, 1));
+		if (lastErates.isEmpty()) {
+			return null;
+		}
+		
+		return lastErates.get(0);
 	}
 	
 	private BankDto getBank(final String bankCode) {

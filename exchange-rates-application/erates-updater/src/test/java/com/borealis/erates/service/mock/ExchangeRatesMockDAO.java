@@ -14,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
+import com.borealis.erates.TestDataContainer;
 import com.borealis.erates.repository.ExchangeRatesDAO;
 import com.borealis.erates.repository.converter.impl.ExchangeRateConverter;
 import com.borealis.erates.repository.model.dbo.ExchangeRateDbo;
@@ -195,6 +196,17 @@ public class ExchangeRatesMockDAO implements ExchangeRatesDAO {
 	@Override
 	public List<ExchangeRateDbo> findAllByDateAndCurrency(LocalDateTime from, Long currencyId) {
 		return null;
+	}
+
+	@Override
+	public List<ExchangeRateDbo> lastExchangeRate(Long bankId, Long currencyId, Pageable pageable) {
+		final ExchangeRateDbo dbo = TestDataContainer.getExchangeRateDbo(true);
+		dbo.getBank().setId(bankId);
+		dbo.getCurrency().setId(currencyId);
+		
+		final List<ExchangeRateDbo> rates = new ArrayList<>();
+		rates.add(dbo);
+		return rates;
 	}
 
 }

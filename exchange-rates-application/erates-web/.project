@@ -2,17 +2,7 @@
 <projectDescription>
   <name>erates-web</name>
   <comment>UI module. NO_M2ECLIPSE_SUPPORT: Project files created with the maven-eclipse-plugin are not supported in M2Eclipse.</comment>
-  <projects>
-    <project>erates-repository</project>
-    <project>erates-common</project>
-    <project>erates-service</project>
-    <project>erates-updater</project>
-    <project>erates-supplier-prior</project>
-    <project>erates-supplier-belarus</project>
-    <project>erates-supplier-bps</project>
-    <project>erates-supplier-belswiss</project>
-    <project>erates-supplier-belapb</project>
-  </projects>
+  <projects/>
   <buildSpec>
     <buildCommand>
       <name>org.eclipse.jdt.core.javabuilder</name>

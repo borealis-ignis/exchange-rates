@@ -13,13 +13,21 @@ import com.borealis.erates.model.dto.ExchangeRateDto;
 public abstract class ParserChecksUtil {
 	
 	public static void checkOkResults(final List<ExchangeRateDto> rates, final List<CurrencyDto> currencies) {
+		checkOkResults(rates, currencies, false);
+	}
+	
+	public static void checkOkResults(final List<ExchangeRateDto> rates, final List<CurrencyDto> currencies, final boolean equalsRates) {
 		assertThat(rates).hasSameSizeAs(currencies)
 			.allMatch(exchangeRate -> currencies.contains(exchangeRate.getCurrency()), "Unacceptable Currency")
 			.allMatch(exchangeRate -> exchangeRate.getBuyRate() != null, "BuyRate can't be null")
 			.allMatch(exchangeRate -> exchangeRate.getSellRate() != null, "SellRate can't be null")
 			.allMatch(exchangeRate -> exchangeRate.getUpdateDate() != null, "UpdateDate can't be null")
 			.allSatisfy(rate -> {
-				assertThat(rate.getBuyRate()).isLessThan(rate.getSellRate());
+				if (equalsRates) {
+					assertThat(rate.getBuyRate()).isEqualTo(rate.getSellRate());
+				} else {
+					assertThat(rate.getBuyRate()).isLessThan(rate.getSellRate());
+				}
 			});
 	}
 	

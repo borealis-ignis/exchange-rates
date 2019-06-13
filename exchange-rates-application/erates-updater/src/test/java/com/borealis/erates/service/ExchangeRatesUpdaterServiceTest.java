@@ -130,7 +130,8 @@ public class ExchangeRatesUpdaterServiceTest {
 		currencies.add(currency);
 		
 		final List<ExchangeRateDto> dtoRates = new ArrayList<>();
-		final ExchangeRateDto erateDto = TestDataContainer.getExchangeRateDto(false);
+		final ExchangeRateDto erateDto = TestDataContainer.getExchangeRateDto(true);
+		erateDto.setId(null);
 		erateDto.getBank().setCode(processor.getBankCode());
 		dtoRates.add(erateDto);
 		
@@ -201,7 +202,8 @@ public class ExchangeRatesUpdaterServiceTest {
 		currencies.add(currency);
 		
 		final List<ExchangeRateDto> dtoRates = new ArrayList<>();
-		final ExchangeRateDto erateDto = TestDataContainer.getExchangeRateDto(false);
+		final ExchangeRateDto erateDto = TestDataContainer.getExchangeRateDto(true);
+		erateDto.setId(null);
 		erateDto.getBank().setCode(processor.getBankCode());
 		dtoRates.add(erateDto);
 		
