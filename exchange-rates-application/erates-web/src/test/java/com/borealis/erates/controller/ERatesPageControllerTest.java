@@ -67,6 +67,7 @@ public class ERatesPageControllerTest {
 		
 		when(eratesService.getBanks()).thenReturn(banks);
 		when(eratesService.getCurrencies()).thenReturn(currencies);
+		when(eratesService.determineDefaultCurrencyCode(currencies)).thenReturn("USD");
 		
 		mvc.perform(get("/erates").with(csrf()))
 			.andDo(print())
@@ -76,6 +77,29 @@ public class ERatesPageControllerTest {
 			.andExpect(model().attribute("bankCode", is("priorb")))
 			.andExpect(model().attribute("currencyCode", is("USD")))
 			.andExpect(view().name("erates"));
+	}
+	
+	@Test
+	public void getCompareExchangeRatesPageTest() throws Exception {
+		final List<Bank> banks = new ArrayList<>();
+		banks.add(prior);
+		
+		final List<CurrencyDto> currencies = new ArrayList<>();
+		currencies.add(TestDataContainer.getUSDCurrencyDto(true));
+		currencies.add(TestDataContainer.getRUBCurrencyDto(true));
+		currencies.add(TestDataContainer.getEURCurrencyDto(true));
+		
+		when(eratesService.getBanks()).thenReturn(banks);
+		when(eratesService.getCurrencies()).thenReturn(currencies);
+		when(eratesService.determineDefaultCurrencyCode(currencies)).thenReturn("USD");
+		
+		mvc.perform(get("/compare-erates").with(csrf()))
+			.andDo(print())
+			.andExpect(status().isOk())
+			.andExpect(model().attribute("banks", IsCollectionWithSize.hasSize(1)))
+			.andExpect(model().attribute("currencies", IsCollectionWithSize.hasSize(3)))
+			.andExpect(model().attribute("currencyCode", is("USD")))
+			.andExpect(view().name("compare-erates"));
 	}
 	
 	@Test
@@ -89,6 +113,7 @@ public class ERatesPageControllerTest {
 		
 		when(eratesService.getBanks()).thenReturn(banks);
 		when(eratesService.getCurrencies()).thenReturn(currencies);
+		when(eratesService.determineDefaultCurrencyCode(currencies)).thenReturn("RUB");
 		
 		mvc.perform(get("/erates").with(csrf()))
 			.andDo(print())
@@ -131,6 +156,7 @@ public class ERatesPageControllerTest {
 		
 		when(eratesService.getBanks()).thenReturn(banks);
 		when(eratesService.getCurrencies()).thenReturn(currencies);
+		when(eratesService.determineDefaultCurrencyCode(currencies)).thenReturn("USD");
 		
 		mvc.perform(get("/erates").with(csrf()))
 			.andDo(print())
