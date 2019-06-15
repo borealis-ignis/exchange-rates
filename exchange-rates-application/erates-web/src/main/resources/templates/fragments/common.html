@@ -1,0 +1,29 @@
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<head th:fragment="common-css">
+			<link rel="stylesheet" th:href="@{/css/erates.css}" />
+		</head>
+		<head th:fragment="common-js">
+			<script th:src="@{/js/jquery.flot/excanvas.min.js}"></script>
+			<script th:src="@{/js/jquery.flot/jquery.js}"></script>
+			<script th:src="@{/js/jquery.flot/jquery.flot.js}"></script>
+			<script th:src="@{/js/jquery.flot/jquery.flot.time.js}"></script>
+			<script th:src="@{/js/erates-common.js}"></script>
+		</head>
+	</head>
+	<body>
+		<div class="top" th:fragment="header">
+			<div class="left-container">
+				<input type="hidden" id="ctx" th:value="@{/}"/>
+				<br clear="all"/>
+			</div>
+			<div class="top-container">
+				<div class="top-buttons">
+					<div class="top-button" id="erates" th:classappend="${page == 'erates'}?active">Banks Rates</div>
+					<div class="top-button" id="compare-erates" th:classappend="${page == 'compare-erates'}?active">Compare Banks</div>
+				</div>
+				<br clear="all"/>
+			</div>
+		</div>
+	</body>
+</html>

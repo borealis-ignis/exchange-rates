@@ -42,14 +42,29 @@ public class ERatesPageController {
 		}
 		
 		final List<CurrencyDto> currencies = eratesService.getCurrencies();
-		final String currencyCode = currencies.stream().filter(c -> "USD".equals(c.getCode())).findFirst()
-							.orElse(currencies.stream().findFirst().orElse(new CurrencyDto())).getCode();
+		final String currencyCode = eratesService.determineDefaultCurrencyCode(currencies);
 		
+		model.put("page", "erates");
 		model.put("banks", banks);
 		model.put("bankCode", bankCode);
 		model.put("currencies", currencies);
 		model.put("currencyCode", currencyCode);
 		return "erates";
+	}
+	
+	@GetMapping(path="/compare-erates")
+	public String getCompareExchangeRatesPage(final Map<String, Object> model) {
+		
+		final List<Bank> banks = eratesService.getBanks();
+		
+		final List<CurrencyDto> currencies = eratesService.getCurrencies();
+		final String currencyCode = eratesService.determineDefaultCurrencyCode(currencies);
+		
+		model.put("page", "compare-erates");
+		model.put("banks", banks);
+		model.put("currencies", currencies);
+		model.put("currencyCode", currencyCode);
+		return "compare-erates";
 	}
 	
 	@ExceptionHandler(Exception.class)

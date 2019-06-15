@@ -1,12 +1,12 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<title>Exchange Rates</title>
+	<title>Compare Exchange Rates</title>
 	<link rel="icon" th:href="@{/images/favicon.ico}"></link>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<head th:replace="~{fragments/common.html :: common-css}"></head>
 	<head th:replace="~{fragments/common.html :: common-js}"></head>
-	<script th:src="@{/js/erates.js}"></script>
+	<script th:src="@{/js/erates-compare.js}"></script>
 </head>
 <body>
 	<div class="container">
@@ -15,11 +15,14 @@
 		
 		<div id="banks_container" class="left-container">
 			<ul class="banks-items">
-				<li th:each="bank : ${banks}" th:text="${bank.bankName}" th:id="${bank.bankCode}" class="bank-item" th:classappend="${bank.bankCode == bankCode}?active"></li>
+				<li th:each="bank : ${banks}" th:text="${bank.bankName + ' (' + bank.bankCode + ')'}" th:id="${bank.bankCode}" class="bank-item"></li>
 			</ul>
 		</div>
 		<div id="charts_container">
 			<div id="topPanel">
+				<div id="buy" class="rate-type-button active">Buy Rate</div>
+				<div id="sell" class="rate-type-button">Sell Rate</div>
+				<div class="delimiter"></div>
 				<div class="currency-button" th:each="currency : ${currencies}" th:text="${currency.code}" th:id="${currency.id}" th:classappend="${currency.code == currencyCode}?active"></div>
 			</div>
 			<div id="legendContainer"></div>

@@ -76,6 +76,11 @@ public class ExchangeRatesService {
 		return banks;
 	}
 	
+	public String determineDefaultCurrencyCode(final List<CurrencyDto> currencies) {
+		return currencies.stream().filter(c -> "USD".equals(c.getCode())).findFirst()
+				.orElse(currencies.stream().findFirst().orElse(new CurrencyDto())).getCode();
+	}
+	
 	private boolean isActiveBank(final Bank bank) {
 		if (bank.getBankCode() == null) {
 			return false;
