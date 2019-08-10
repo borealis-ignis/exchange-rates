@@ -33,12 +33,17 @@ public class ERatesPageController {
 	@GetMapping(path="/erates")
 	public String getExchangeRatesPage(
 			final Map<String, Object> model,
-			@RequestParam(required = false, name = "bankCode") String bankCode) {
+			@RequestParam(required = false, name = "bankCode") String bankCode,
+			@RequestParam(required = false, name = "months") Integer months) {
 		
 		final List<Bank> banks = eratesService.getBanks();
 		if (StringUtils.isBlank(bankCode)) {
 			bankCode = banks.stream().filter(b -> "priorb".equals(b.getBankCode())).findFirst()
 				.orElse(banks.stream().findFirst().orElse(new NoBank())).getBankCode();
+		}
+		
+		if (months == null) {
+			months = 1;
 		}
 		
 		final List<CurrencyDto> currencies = eratesService.getCurrencies();
@@ -49,6 +54,7 @@ public class ERatesPageController {
 		model.put("bankCode", bankCode);
 		model.put("currencies", currencies);
 		model.put("currencyCode", currencyCode);
+		model.put("months", months);
 		return "erates";
 	}
 	
@@ -64,6 +70,7 @@ public class ERatesPageController {
 		model.put("banks", banks);
 		model.put("currencies", currencies);
 		model.put("currencyCode", currencyCode);
+		model.put("months", 1);
 		return "compare-erates";
 	}
 	

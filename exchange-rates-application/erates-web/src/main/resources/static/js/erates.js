@@ -3,7 +3,8 @@ $(document).ready(function() {
 	$("div#topPanel div.currency-button").click(clickCurrencyEvent);
 	
 	var currencyId = $("div#topPanel div.currency-button.active").attr("id");
-	updateChartArea(currencyId);
+	var month = Number($("div.months-dropdown span.chosen").attr("month"));
+	updateChartArea(currencyId, month);
 });
 
 var clickBankEvent = function() {
@@ -16,9 +17,20 @@ var clickBankEvent = function() {
 	updateActivity($("div#banks_container ul.banks-items li.bank-item"), $bankItem);
 	
 	var bankCode = $bankItem.attr("id");
+	var month = Number($("div.months-dropdown span.chosen").attr("month"));
+	updateEratesPage();
+}
+
+function updateEratesPage() {
+	var months = Number($("div.months-dropdown span.chosen").attr("month"));
+	if (typeof months != 'number') {
+		months = 1;
+	}
+	
+	var bankCode = $("ul.banks-items li.bank-item.active").attr("id");
 	
 	var ctx = $("input#ctx").val();
-	document.location.href = ctx + "erates?bankCode=" + bankCode;
+	document.location.href = ctx + "erates?bankCode=" + bankCode + "&months=" + months;
 }
 
 var clickCurrencyEvent = function() {
@@ -30,7 +42,10 @@ var clickCurrencyEvent = function() {
 	
 	updateActivity($("div#topPanel div.currency-button"), $currencyButton);
 	
-	updateChartArea($currencyButton.attr("id"));
+	var currency = $currencyButton.attr("id");
+	var month = Number($("div.months-dropdown span.chosen").attr("month"));
+	
+	updateChartArea(currency, month);
 };
 
 function updateActivity($items, $activeItem) {
@@ -38,11 +53,11 @@ function updateActivity($items, $activeItem) {
 	$activeItem.addClass(activeClass);
 }
 
-function updateChartArea(currencyId) {
+function updateChartArea(currencyId, months) {
 	var ctx = $("input#ctx").val();
 	$.ajax({
 		dataType: "json",
-		url: ctx + "exchangerates?currencyId=" + currencyId,
+		url: ctx + "exchangerates?currencyId=" + currencyId + "&months=" + months,
 		success: chartUpdateEvent
 	});
 }

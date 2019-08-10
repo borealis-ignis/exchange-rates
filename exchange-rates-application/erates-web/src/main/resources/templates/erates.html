@@ -21,6 +21,8 @@
 		<div id="charts_container">
 			<div id="topPanel">
 				<div class="currency-button" th:each="currency : ${currencies}" th:text="${currency.code}" th:id="${currency.id}" th:classappend="${currency.code == currencyCode}?active"></div>
+				<div class="delimiter"></div>
+				<div th:replace="~{fragments/common.html :: months-dropdown}"></div>
 			</div>
 			<div id="legendContainer"></div>
 			<div id="chart"></div>

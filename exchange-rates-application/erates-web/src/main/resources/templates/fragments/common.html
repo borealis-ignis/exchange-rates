@@ -25,5 +25,16 @@
 				<br clear="all"/>
 			</div>
 		</div>
+		
+		<div class="months-dropdown" th:fragment="months-dropdown">
+			<span class="chosen" th:attr="month=${months}" th:text="${months} + ' months'"></span>
+			<div class="months-dropdown-content">
+				<p month="1" class="months">1 months</p>
+				<p month="3" class="months">3 months</p>
+				<p month="6" class="months">6 months</p>
+				<p month="12" class="months">12 months</p>
+			</div>
+		</div>
+		
 	</body>
 </html>

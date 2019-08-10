@@ -31,8 +31,15 @@ public class ERatesRestController {
 	}
 	
 	@GetMapping(path = "/exchangerates")
-	public List<ExchangeRateDto> getExchangeRates(@RequestParam(required = true, name = "currencyId") final Long currencyId) {
-		final LocalDateTime defaultFromDate = LocalDateTime.now().minusMonths(1l);
+	public List<ExchangeRateDto> getExchangeRates(
+			@RequestParam(required = true, name = "currencyId") final Long currencyId,
+			@RequestParam(required = false, name = "months") Long months) {
+		
+		if (months == null) {
+			months = 1l;
+		}
+		
+		final LocalDateTime defaultFromDate = LocalDateTime.now().minusMonths(months);
 		return eratesService.getExchangeRates(defaultFromDate, currencyId);
 	}
 	

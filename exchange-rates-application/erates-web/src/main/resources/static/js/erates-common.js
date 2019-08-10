@@ -1,10 +1,21 @@
 $(document).ready(function() {
 	$("div.top-container div.top-buttons div.top-button").click(clickTopButtonEvent);
+	$("div.months-dropdown p.months").click(clickMonthEvent);
 });
 
 
 var activeClass = "active";
 
+
+var clickMonthEvent = function() {
+	var $monthItem = $(this);
+	
+	var month = Number($monthItem.attr("month"));
+	$("div.months-dropdown span.chosen").text(month + " months");
+	$("div.months-dropdown span.chosen").attr("month", month);
+	
+	updateEratesPage();
+}
 
 var clickTopButtonEvent = function() {
 	var $topButton = $(this);

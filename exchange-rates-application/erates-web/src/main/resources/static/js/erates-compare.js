@@ -43,11 +43,12 @@ function updateChartArea() {
 	
 	var currencyId = $("div#topPanel div.currency-button.active").attr("id");
 	var rateType = $("div#topPanel div.rate-type-button.active").attr("id");
+	var month = Number($("div.months-dropdown span.chosen").attr("month"));
 	
 	var ctx = $("input#ctx").val();
 	$.ajax({
 		dataType: "json",
-		url: ctx + "exchangerates?currencyId=" + currencyId,
+		url: ctx + "exchangerates?currencyId=" + currencyId + "&months=" + month,
 		success: function(data) {
 			updateChart(data, activeBanks, rateType);
 		}
@@ -81,4 +82,9 @@ function updateChart(data, activeBanks, rateType) {
 	var linesColors = ["#1fa403", "#0662c6", "#8d7802", "#be2d05", "#b405be", "#dae003", "#000000", "#06e2dc", "#25fa21", "#51038e"];
 	
 	drawChart(dataset, linesColors);
+}
+
+
+function updateEratesPage() {
+	updateChartArea();
 }
