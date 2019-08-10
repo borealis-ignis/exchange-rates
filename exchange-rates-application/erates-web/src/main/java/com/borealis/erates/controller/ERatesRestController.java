@@ -33,7 +33,7 @@ public class ERatesRestController {
 	@GetMapping(path = "/exchangerates")
 	public List<ExchangeRateDto> getExchangeRates(
 			@RequestParam(required = true, name = "currencyId") final Long currencyId,
-			@RequestParam(required = false, name = "months") Long months) {
+			@RequestParam(required = true, name = "months") Long months) {
 		
 		if (months == null) {
 			months = 1l;

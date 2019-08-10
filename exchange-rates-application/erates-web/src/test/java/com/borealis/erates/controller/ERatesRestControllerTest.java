@@ -41,7 +41,7 @@ public class ERatesRestControllerTest {
 	public void getExchangeRatesTest() throws Exception {
 		final Long currencyId = 1l;
 		
-		mvc.perform(get("/exchangerates?currencyId=" + currencyId)
+		mvc.perform(get("/exchangerates?currencyId=" + currencyId + "&months=1")
 			.with(csrf())
 			.contentType(MediaType.APPLICATION_JSON_UTF8))
 			.andDo(print())
