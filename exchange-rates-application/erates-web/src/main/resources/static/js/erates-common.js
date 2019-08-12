@@ -1,6 +1,10 @@
 $(document).ready(function() {
 	$("div.top-container div.top-buttons div.top-button").click(clickTopButtonEvent);
 	$("div.months-dropdown p.months").click(clickMonthEvent);
+	
+	$("div.months-dropdown span.chosen").click(function () {
+		$("div.months-dropdown div.months-dropdown-content").toggle();
+	});
 });
 
 
