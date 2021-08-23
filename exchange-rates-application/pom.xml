@@ -19,7 +19,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		
-		<jsoup.version>1.11.3</jsoup.version>
+		<jsoup.version>1.14.2</jsoup.version>
 		<json.version>20180813</json.version>
 		<httpclient.version>4.5.8</httpclient.version>
 		<commons-io.version>2.6</commons-io.version>
